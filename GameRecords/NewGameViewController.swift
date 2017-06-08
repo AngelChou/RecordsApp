@@ -30,11 +30,16 @@ class NewGameViewController: UIViewController {
     // MARK: - IBAction
     
     @IBAction func StartNewGameButtonPressed(_ sender: Any) {
-        let gameName = gameNameTextField.text
-        let vistingTeamName = vistingTeamNameTextField.text
-        
-        print("Game Name: \(gameName)")
-        print("Visting Team Name: \(vistingTeamName)")
+        if let gameName = gameNameTextField.text {
+            print("Game Name: \(gameName)")
+        } else {
+            print("You have to enter the name of game")
+        }
+        if let vistingTeamName = vistingTeamNameTextField.text {
+            print("Visting Team Name: \(vistingTeamName)")
+        } else {
+            print("You have to enter the name of the visting team")
+        }
         
         
     }

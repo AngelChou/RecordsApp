@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import MessageUI
+import CoreData
 
-class RegisterViewController: UIViewController, MFMailComposeViewControllerDelegate {
+class RegisterViewController: UIViewController {
 
     // MARK: - IBOutlets
     
@@ -40,7 +40,22 @@ class RegisterViewController: UIViewController, MFMailComposeViewControllerDeleg
     
     @IBAction func signUpButtonClick(_ sender: Any) {
         if check() {
-            // TODO: create new account in core data
+            // create new account in core data
+            let viewContext = CoreDataManager.getViewContext()
+            
+            let newAccount = NSEntityDescription.insertNewObject(forEntityName: "Users", into: viewContext) as! Users
+            
+            newAccount.username = username
+            newAccount.password = password
+            newAccount.emailVerified = false
+            
+            do{
+                try viewContext.save()
+            }
+            catch{
+                print("Could not save \(error)")
+            }
+
             
             
             // TODO: send verify email
@@ -114,6 +129,7 @@ class RegisterViewController: UIViewController, MFMailComposeViewControllerDeleg
         }
         
         // TODO: check not duplicate
+        
         return true
     }
     

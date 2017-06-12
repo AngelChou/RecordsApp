@@ -16,6 +16,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var errorMsgLabel: UILabel!
     
     // MARK: - Variable
+    var isLoginSuccess = false
     
     // MARK: - UIViewController Functions
     override func viewDidLoad() {
@@ -43,8 +44,16 @@ class LoginViewController: UIViewController {
     // MARK: - IBActions
     @IBAction func loginButtonClicked(_ sender: Any) {
         if validateLoginInfo() {
-            showErrorMsg(msg: "登入成功", textfield: nil)
+            
+            // check if email has been verified
+            guard CoreDataManager.isEmailVerified(usernameTextField.text!) else {
+                showErrorMsg(msg: "電子郵件信箱尚未驗證", textfield: nil)
+                return
+            }
+            
             // TODO: enter dashboard
+            isLoginSuccess = true
+//            showErrorMsg(msg: "登入成功", textfield: nil)
             
         }
     }
@@ -97,6 +106,7 @@ class LoginViewController: UIViewController {
         errorMsgLabel.text = msg
     }
     
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -104,6 +114,20 @@ class LoginViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
       
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "signUp" || identifier == "forgetPassword" {
+            print("enable segue")
+            return true
+        }
+        guard isLoginSuccess && identifier == "showDashboard" else {
+            print("disable segue")
+            return false
+        }
+        
+        return true
+        
     }
     
 

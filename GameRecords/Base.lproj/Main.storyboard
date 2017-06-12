@@ -181,13 +181,14 @@
                                 <state key="normal" title="登入"/>
                                 <connections>
                                     <action selector="loginButtonClicked:" destination="vII-ry-k6a" eventType="touchUpInside" id="uu0-Yg-tTq"/>
+                                    <segue destination="g64-a8-E8E" kind="show" identifier="showDashboard" id="m72-ff-A0D"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lC0-b8-t2j">
                                 <rect key="frame" x="133" y="316" width="108" height="30"/>
                                 <state key="normal" title="註冊一個新帳號"/>
                                 <connections>
-                                    <segue destination="ihq-0j-Ykg" kind="show" identifier="SignUp" id="1UT-3O-1eO"/>
+                                    <segue destination="ihq-0j-Ykg" kind="show" identifier="signUp" id="1UT-3O-1eO"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PeJ-3Q-Max">

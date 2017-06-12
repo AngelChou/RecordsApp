@@ -82,7 +82,8 @@ class CoreDataManager: NSObject {
         
         newAccount.username = username
         newAccount.password = password
-        newAccount.emailVerified = false
+        // TODO: change default value to false
+        newAccount.emailVerified = true
         
         do{
             try viewContext.save()
@@ -113,6 +114,29 @@ class CoreDataManager: NSObject {
         print("No duplicate user found")
         return false
 
+    }
+    
+    static func isEmailVerified(_ email: String) -> Bool {
+        let users = getData(entityName: "Users", predicate: NSPredicate(format: "username == %@", email)) as! [Users]
+        if users.count > 0{
+            print(users.count)
+            for user in users {
+                
+                print(user.username!)
+                print(user.password!)
+                
+                if user.emailVerified {
+                    print("This email has been verified!")
+                    return true
+                }
+            }
+            
+            print("This email has not been verified!")
+            return false
+        }
+        
+        print("This email is not found")
+        return false
     }
     
     

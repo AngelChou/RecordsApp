@@ -11,6 +11,8 @@ import CoreData
 
 class CoreDataManager: NSObject {
     
+    // MARK: - Common Functions
+    
     static func getViewContext() -> NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
@@ -54,4 +56,66 @@ class CoreDataManager: NSObject {
             print("Could not delete \(error)")
         }
     }
+    
+    // MARK: - Customized Functions: Users
+    static func isLoginSuccess(username: String, password: String) -> Bool {
+        
+        let users = getData(entityName: "Users", predicate: NSPredicate(format: "username==%@ && password==%@", username, password)) as! [Users]
+        
+        for user in users {
+            print(user.username ?? "no username")
+            print(user.password ?? "no password")
+        }
+        
+        if users.count == 1 {
+            print("we got match user!")
+            return true
+        }
+        
+        return false
     }
+    
+    static func createNewUser(username: String, password: String) -> Bool{
+        
+        let viewContext = getViewContext()
+        let newAccount = NSEntityDescription.insertNewObject(forEntityName: "Users", into: viewContext) as! Users
+        
+        newAccount.username = username
+        newAccount.password = password
+        newAccount.emailVerified = false
+        
+        do{
+            try viewContext.save()
+        }
+        catch{
+            print("Could not save \(error)")
+            return false
+        }
+        
+        print("Create new user success.")
+        return true
+    }
+    
+    static func isEmailExist(_ email: String) -> Bool {
+        let users = getData(entityName: "Users", predicate: NSPredicate(format: "username == %@", email)) as! [Users]
+        if users.count > 0{
+            print(users.count)
+            for user in users {
+                
+                print(user.username!)
+                print(user.password!)
+            }
+            
+            print("This username has been registered!")
+            return true
+        }
+        
+        print("No duplicate user found")
+        return false
+
+    }
+    
+    
+    
+    
+}

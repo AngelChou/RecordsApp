@@ -1,21 +1,18 @@
 //
-//  LoginViewController.swift
+//  ForgetPasswordViewController.swift
 //  GameRecords
 //
-//  Created by Shun-Ching, Chou on 2017/6/8.
+//  Created by Shun-Ching, Chou on 2017/6/10.
 //  Copyright © 2017年 Shun-Ching, Chou. All rights reserved.
 //
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class ForgetPasswordViewController: UIViewController {
 
     // MARK: - IBOutlets
     @IBOutlet weak var usernameTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var errorMsgLabel: UILabel!
-    
-    // MARK: - Variable
     
     // MARK: - UIViewController Functions
     override func viewDidLoad() {
@@ -23,16 +20,7 @@ class LoginViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         errorMsgLabel.alpha = 0
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        errorMsgLabel.alpha = 0
         errorMsgLabel.text = ""
-        usernameTextField.text = ""
-        passwordTextField.text = ""
-        usernameTextField.layer.borderWidth = 0.0
-        passwordTextField.layer.borderWidth = 0.0
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,50 +29,47 @@ class LoginViewController: UIViewController {
     }
     
     // MARK: - IBActions
-    @IBAction func loginButtonClicked(_ sender: Any) {
-        if validateLoginInfo() {
-            showErrorMsg(msg: "登入成功", textfield: nil)
-            // TODO: enter dashboard
-            
+    @IBAction func cancelButtonClicked(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func SendEmailClicked(_ sender: Any) {
+        if validateTextFieldContent() {
+            // TODO: send update password email
+            showAlert(alertTitle: "發送新密碼", alertMessage: "新密碼已寄至您的電子郵件信箱，請使用新密碼重新登入，謝謝！")
         }
     }
-    @IBAction func usernameTextFieldClick(_ sender: Any) {
+    @IBAction func usernameTextFieldClicked(_ sender: Any) {
         usernameTextField.layer.borderWidth = 0.0
         errorMsgLabel.alpha = 0
         errorMsgLabel.text = ""
     }
     
-    @IBAction func passwordTextFieldClick(_ sender: Any) {
-        passwordTextField.layer.borderWidth = 0.0
-        errorMsgLabel.alpha = 0
-        errorMsgLabel.text = ""
-    }
-    
     // MARK: - Functions
-    func validateLoginInfo() -> Bool {
-        
-        // check not empty
+    
+    func validateTextFieldContent() -> Bool {
+        // is textfield empty
         guard !usernameTextField.text!.isEmpty else {
             showErrorMsg(msg: "請輸入帳號", textfield: usernameTextField)
             return false
         }
         
-        guard !passwordTextField.text!.isEmpty else {
-            showErrorMsg(msg: "請輸入密碼", textfield: passwordTextField)
+        let username = usernameTextField.text!
+        
+        // is email format correct
+        guard CommonFunction.checkEmailFormat(username) else {
+            showErrorMsg(msg: "無效的電子郵件信箱", textfield: usernameTextField)
             return false
         }
         
-        let username = usernameTextField.text!
-        let password = passwordTextField.text!
-        
-        // check user input data correctness
-        guard CoreDataManager.isLoginSuccess(username: username, password: password) else {
-            print("no match data")
-            showErrorMsg(msg: "帳號密碼錯誤", textfield: nil)
+        // is email exist
+        if !CoreDataManager.isEmailExist(username) {
+            showErrorMsg(msg: "此電子郵件信箱未註冊", textfield: usernameTextField)
             return false
         }
         
         return true
+        
     }
     
     func showErrorMsg(msg: String, textfield: UITextField?) {
@@ -97,14 +82,25 @@ class LoginViewController: UIViewController {
         errorMsgLabel.text = msg
     }
     
+    func showAlert (alertTitle: String, alertMessage: String){
+        let alert = UIAlertController(title: alertTitle, message: "\(alertMessage)", preferredStyle: UIAlertControllerStyle.alert)
+        let ok: UIAlertAction = UIAlertAction(title: "OK", style: .default, handler: {
+            action in
+            self.dismiss(animated: true, completion: nil)
+        })
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
+    }
+
+
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-      
     }
-    
+    */
 
 }

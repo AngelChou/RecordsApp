@@ -18,6 +18,8 @@
 		0BCC0DF31EE9500000CE4651 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC0DF21EE9500000CE4651 /* CoreDataManager.swift */; };
 		0BCC0DF61EE9510500CE4651 /* Users+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC0DF41EE9510500CE4651 /* Users+CoreDataClass.swift */; };
 		0BCC0DF71EE9510500CE4651 /* Users+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC0DF51EE9510500CE4651 /* Users+CoreDataProperties.swift */; };
+		0BCC0DF91EEA474D00CE4651 /* CommonFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC0DF81EEA474D00CE4651 /* CommonFunctions.swift */; };
+		0BCC0DFB1EEB9B3B00CE4651 /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC0DFA1EEB9B3B00CE4651 /* ForgetPasswordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		0BCC0DF21EE9500000CE4651 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		0BCC0DF41EE9510500CE4651 /* Users+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Users+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0BCC0DF51EE9510500CE4651 /* Users+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Users+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0BCC0DF81EEA474D00CE4651 /* CommonFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFunctions.swift; sourceTree = "<group>"; };
+		0BCC0DFA1EEB9B3B00CE4651 /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,8 @@
 				0BCC0DEE1EE8F57D00CE4651 /* LoginViewController.swift */,
 				0BCC0DF01EE8F58F00CE4651 /* RegisterViewController.swift */,
 				0BCC0DF21EE9500000CE4651 /* CoreDataManager.swift */,
+				0BCC0DF81EEA474D00CE4651 /* CommonFunctions.swift */,
+				0BCC0DFA1EEB9B3B00CE4651 /* ForgetPasswordViewController.swift */,
 			);
 			path = GameRecords;
 			sourceTree = "<group>";
@@ -155,7 +161,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BCC0DF91EEA474D00CE4651 /* CommonFunctions.swift in Sources */,
 				0BCC0DF61EE9510500CE4651 /* Users+CoreDataClass.swift in Sources */,
+				0BCC0DFB1EEB9B3B00CE4651 /* ForgetPasswordViewController.swift in Sources */,
 				0BCC0DF31EE9500000CE4651 /* CoreDataManager.swift in Sources */,
 				0BCC0DEF1EE8F57D00CE4651 /* LoginViewController.swift in Sources */,
 				0BCC0DF11EE8F58F00CE4651 /* RegisterViewController.swift in Sources */,
